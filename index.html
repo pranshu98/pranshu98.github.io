@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MOH SCENTS - Handmade Soy Candles</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fffef9;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #4b2e2e;
+    }
+
+    .carousel {
+      position: relative;
+      width: 300px;
+      margin: 30px auto;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .controls {
+      margin-top: 10px;
+    }
+
+    .controls button {
+      padding: 8px 12px;
+      margin: 0 5px;
+      font-size: 16px;
+      border: none;
+      background-color: #4b2e2e;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      background-color: #7d4b4b;
+    }
+  </style>
+</head>
+<body>
+  <h1>🕯️ MOH SCENTS</h1>
+  <p>Eco-friendly handmade soy candles</p>
+  <p>📍 Soibari, Tezpur, Assam</p>
+
+  <div class="carousel" id="carousel"></div>
+  <div class="controls">
+    <button onclick="prevImage()">⟨ Prev</button>
+    <button onclick="nextImage()">Next ⟩</button>
+  </div>
+
+  <script>
+    const totalImages = 10; // Set the number of images you have
+    let currentIndex = 0;
+    const carousel = document.getElementById("carousel");
+
+    // Dynamically load images like 1.jpeg, 2.jpeg...
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement("img");
+      img.src = `images/${i}.jpeg`;
+      img.alt = `Candle ${i}`;
+      img.className = i === 1 ? "active" : "";
+      carousel.appendChild(img);
+    }
+
+    const images = document.querySelectorAll("#carousel img");
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle("active", i === index);
+      });
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      showImage(currentIndex);
+    }
+
+    // Auto-slide every 4 seconds
+    setInterval(nextImage, 4000);
+  </script>
+</body>
+</html>
