@@ -5,7 +5,7 @@
   <title>MOH SCENTS - Handmade Soy Candles</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #fffef9;
       text-align: center;
       padding: 20px;
@@ -17,15 +17,17 @@
 
     .carousel {
       position: relative;
-      width: 300px;
+      width: 90%;
+      max-width: 350px;
       margin: 30px auto;
     }
 
     .carousel img {
       width: 100%;
       height: auto;
-      border-radius: 10px;
+      border-radius: 12px;
       display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     .carousel img.active {
@@ -33,11 +35,11 @@
     }
 
     .controls {
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .controls button {
-      padding: 8px 12px;
+      padding: 8px 16px;
       margin: 0 5px;
       font-size: 16px;
       border: none;
@@ -56,6 +58,7 @@
   <h1>🕯️ MOH SCENTS</h1>
   <p>Eco-friendly handmade soy candles</p>
   <p>📍 Soibari, Tezpur, Assam</p>
+  <p>DM us on Instagram: <a href="https://instagram.com/mohscents_" target="_blank">@mohscents_</a></p>
 
   <div class="carousel" id="carousel"></div>
   <div class="controls">
@@ -64,18 +67,29 @@
   </div>
 
   <script>
-    const totalImages = 10; // Set the number of images you have
-    let currentIndex = 0;
-    const carousel = document.getElementById("carousel");
+    // Image filenames in root directory
+    const imageNames = [
+      "IMG-20250626-WA0003.jpg",
+      "IMG-20250626-WA0004.jpg",
+      "IMG-20250626-WA0005.jpg",
+      "IMG-20250626-WA0006.jpg",
+      "IMG-20250626-WA0007.jpg",
+      "IMG-20250626-WA0008.jpg",
+      "IMG-20250626-WA0009.jpg",
+      "IMG-20250626-WA0010.jpg",
+      "IMG-20250626-WA0011.jpg"
+    ];
 
-    // Dynamically load images like 1.jpeg, 2.jpeg...
-    for (let i = 1; i <= totalImages; i++) {
+    const carousel = document.getElementById("carousel");
+    let currentIndex = 0;
+
+    imageNames.forEach((name, index) => {
       const img = document.createElement("img");
-      img.src = `images/${i}.jpeg`;
-      img.alt = `Candle ${i}`;
-      img.className = i === 1 ? "active" : "";
+      img.src = name;
+      img.alt = `Candle ${index + 1}`;
+      img.className = index === 0 ? "active" : "";
       carousel.appendChild(img);
-    }
+    });
 
     const images = document.querySelectorAll("#carousel img");
 
@@ -86,17 +100,17 @@
     }
 
     function nextImage() {
-      currentIndex = (currentIndex + 1) % totalImages;
+      currentIndex = (currentIndex + 1) % images.length;
       showImage(currentIndex);
     }
 
     function prevImage() {
-      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
       showImage(currentIndex);
     }
 
-    // Auto-slide every 4 seconds
-    setInterval(nextImage, 4000);
+    // Auto-slide every 5 seconds
+    setInterval(nextImage, 5000);
   </script>
 </body>
 </html>
