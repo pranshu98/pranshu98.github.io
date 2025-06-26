@@ -3,105 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MOH SCENTS - Handmade Soy Candles</title>
+  <title>MOH SCENTS - Candle Catalog</title>
   <style>
     :root {
       --bg: #fffef9;
       --text: #2c2c2c;
       --accent: #4b2e2e;
+      --card: #ffffff;
     }
     body.dark {
-      --bg: #181818;
+      --bg: #1a1a1a;
       --text: #f2f2f2;
       --accent: #ffc107;
+      --card: #2b2b2b;
     }
 
     body {
       margin: 0;
-      padding: 0;
       background: var(--bg);
       color: var(--text);
       font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1rem;
     }
 
     h1 {
-      margin-top: 20px;
       color: var(--accent);
-    }
-
-    .info {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .carousel {
-      position: relative;
-      max-width: 350px;
-      width: 90%;
-    }
-
-    .carousel img {
-      width: 100%;
-      border-radius: 12px;
-      display: none;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .carousel img.active {
-      display: block;
-    }
-
-    .controls {
-      margin-top: 10px;
-    }
-
-    .controls button,
-    .btn {
-      padding: 10px 18px;
-      margin: 5px;
-      background-color: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    .controls button:hover,
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .lightbox img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 12px;
-    }
-
-    .lightbox.active {
-      display: flex;
+      margin-bottom: 0.3rem;
     }
 
     .dark-mode-toggle {
       position: absolute;
       top: 10px;
       right: 10px;
+      padding: 6px 12px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .info {
+      padding: 0.8rem;
+    }
+
+    .info h2 {
+      margin: 0.4rem 0;
+      font-size: 1.2rem;
+    }
+
+    .info p {
+      margin: 0.2rem 0;
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 0.6rem;
+      background-color: var(--accent);
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .lightbox.active {
+      display: flex;
     }
 
     .contact-float {
@@ -120,76 +138,86 @@
   </style>
 </head>
 <body>
-  <button class="dark-mode-toggle btn" onclick="toggleDarkMode()">🌓</button>
 
-  <h1>🕯️ MOH SCENTS</h1>
-  <div class="info">
-    <p>Eco-friendly handmade soy candles</p>
-    <p>📍 Soibari, Tezpur, Assam</p>
-    <p>DM us on Instagram: <a href="https://instagram.com/mohscents_" target="_blank">@mohscents_</a></p>
-  </div>
+  <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌓</button>
 
-  <div class="carousel" id="carousel"></div>
-  <div class="controls">
-    <button onclick="prevImage()">⟨ Prev</button>
-    <button onclick="nextImage()">Next ⟩</button>
-    <a class="btn" href="https://wa.me/918936934679?text=Hi%20MOH%20SCENTS%2C%20I%20want%20to%20buy%20your%20candles!" target="_blank">💬 Buy Now</a>
-  </div>
+  <header>
+    <h1>🕯️ MOH SCENTS</h1>
+    <p>Handmade eco-friendly soy candles</p>
+    <p>📍 Soibari, Tezpur, Assam — <a href="https://instagram.com/mohscents_" target="_blank">@mohscents_</a></p>
+  </header>
+
+  <main class="grid" id="catalog"></main>
 
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Zoomed Candle">
+    <img id="lightbox-img" src="" alt="Zoomed Image" />
   </div>
 
   <a class="contact-float" href="tel:8936934679" title="Call us">📞</a>
 
   <script>
-    const imageNames = [
-      "IMG-20250626-WA0003.jpg",
-      "IMG-20250626-WA0004.jpg",
-      "IMG-20250626-WA0005.jpg",
-      "IMG-20250626-WA0006.jpg",
-      "IMG-20250626-WA0007.jpg",
-      "IMG-20250626-WA0008.jpg",
-      "IMG-20250626-WA0009.jpg",
-      "IMG-20250626-WA0010.jpg",
-      "IMG-20250626-WA0011.jpg"
+    const products = [
+      {
+        img: "IMG-20250626-WA0003.jpg",
+        name: "Blue Rose Candle",
+        price: "₹199",
+        desc: "Floral-shaped scented candle"
+      },
+      {
+        img: "IMG-20250626-WA0004.jpg",
+        name: "Lavender Jar",
+        price: "₹249",
+        desc: "Soothing lavender in a jar"
+      },
+      {
+        img: "IMG-20250626-WA0005.jpg",
+        name: "Festive Diya Set",
+        price: "₹299",
+        desc: "Traditional diya candles for festivals"
+      },
+      {
+        img: "IMG-20250626-WA0006.jpg",
+        name: "Elegant Glass Pot",
+        price: "₹349",
+        desc: "Minimalistic fragrance decor"
+      },
+      {
+        img: "IMG-20250626-WA0007.jpg",
+        name: "Color Duo Pack",
+        price: "₹299",
+        desc: "Set of two scented candles"
+      },
+      {
+        img: "IMG-20250626-WA0008.jpg",
+        name: "Peach Blossom",
+        price: "₹229",
+        desc: "Refreshing fruity floral candle"
+      }
+      // Add more if needed...
     ];
 
-    const carousel = document.getElementById("carousel");
+    const catalog = document.getElementById("catalog");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
-    let currentIndex = 0;
 
-    imageNames.forEach((name, index) => {
-      const img = document.createElement("img");
-      img.src = name;
-      img.alt = `Candle ${index + 1}`;
-      img.className = index === 0 ? "active" : "";
-      img.onclick = () => openLightbox(name);
-      carousel.appendChild(img);
+    products.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}" onclick="openLightbox('${p.img}')">
+        <div class="info">
+          <h2>${p.name}</h2>
+          <p>${p.desc}</p>
+          <p><strong>${p.price}</strong></p>
+          <a class="btn" href="https://wa.me/918936934679?text=Hi%20MOH%20SCENTS%2C%20I%20want%20to%20buy%20${encodeURIComponent(p.name)}!" target="_blank">Buy on WhatsApp</a>
+        </div>
+      `;
+      catalog.appendChild(card);
     });
 
-    const images = document.querySelectorAll("#carousel img");
-
-    function showImage(index) {
-      images.forEach((img, i) => {
-        img.classList.toggle("active", i === index);
-      });
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % images.length;
-      showImage(currentIndex);
-    }
-
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      showImage(currentIndex);
-    }
-
     function openLightbox(src) {
-      lightbox.classList.add("active");
       lightboxImg.src = src;
+      lightbox.classList.add("active");
     }
 
     function closeLightbox() {
@@ -199,9 +227,6 @@
     function toggleDarkMode() {
       document.body.classList.toggle("dark");
     }
-
-    // Auto-slide
-    setInterval(nextImage, 6000);
   </script>
 </body>
 </html>
